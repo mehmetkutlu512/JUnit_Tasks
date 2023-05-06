@@ -1,12 +1,11 @@
 import org.junit.AfterClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class Task1 extends TestBase{
+public class Task01 extends TestBase{
 
      List<WebElement> webDriverList;
 
@@ -34,6 +33,8 @@ public class Task1 extends TestBase{
         }
 
     }
+    //Sayfayı kapatalım
+
 
     @AfterClass
     public static void afterClass() throws Exception {
