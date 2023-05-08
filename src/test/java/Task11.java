@@ -4,7 +4,10 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 import java.io.*;
 
@@ -53,17 +56,23 @@ public class Task11 extends TestBase{
 
     @Test
     public void excelTest2() throws IOException {
-        //    -İkinci methodda https://www.bluerentalcars.com/ adresine gidip
         FileInputStream fis = new FileInputStream("C:\\Users\\Mehmet\\OneDrive\\Masaüstü\\data.xlsx");
         Workbook workbook = WorkbookFactory.create(fis);
         String email = workbook.getSheet("Sheet0").getRow(1).getCell(0).toString();
-        String password = workbook.getSheet("Sheet0").getRow(1).getCell(0).toString();
+        String password = workbook.getSheet("Sheet0").getRow(1).getCell(1).toString();
+        System.out.println(email + " || " + password);
 
 
 
-
+        //    -İkinci methodda https://www.bluerentalcars.com/ adresine gidip
+        driver.get("https://www.bluerentalcars.com/");
 
         //    -Excel dosyasından aldığımız kullanıcı bilgileri ile login olalım
+        driver.findElement(By.xpath("(//a[@role='button'])[1]")).click();
+        driver.findElement(By.xpath("//input[@id='formBasicEmail']")).sendKeys(email, Keys.TAB, password, Keys.ENTER);
+
         //    -Login olduğumuzu doğrulayalım
+        String isim = driver.findElement(By.xpath("//button[text()='Erol Evren']")).getText();
+        Assert.assertEquals("Erol Evren", isim);
     }
 }
